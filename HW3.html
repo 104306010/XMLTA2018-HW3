@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+	 crossorigin="anonymous">
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+	 crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+	 crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<title>文化部 開放資料服務網</title>
+	<style type="text/css">
+		body {
+			font-family: Microsoft JhengHei, serif, sans-serif, cursive, fantasy, monospace;
+		}
+
+		#header {
+			position: relative;
+		}
+
+		#header_image {
+			width: 100%;
+			height: auto;
+			-webkit-filter: saturate(0.5);
+			-webkit-filter: opacity(0.8);
+		}
+
+		#header_name {
+			position: absolute;
+			top: 30%;
+			left: 10%;
+			padding: 20px 20px 20px 20px;
+			transform: translate(-10%, -5%);
+			border: solid;
+			border-width: 2px;
+			border-radius: 5px;
+			background: rgba(0, 0, 0, 0.1);
+			color: snow;
+			font-weight: bold;
+		}
+
+		table {
+            margin-bottom: 100px;
+            margin-left: 80px;
+            margin-right: 80px;
+            text-align: left;
+        }
+
+		.title {
+            font-size: 20px;
+			margin: 10px 0px;
+			padding: 10px 20px;
+            background-color: #0BD2F1;
+            border-radius: 5px;
+            color: white;			
+            font-weight: bold;
+        }
+
+		#sub_title {
+			margin: 30px;
+			font-size: 30px;
+			text-align: center;
+		}
+
+		#hint {
+			margin: 30px;
+			font-size: 20px;
+			text-align: center;
+			color: gray;
+		}
+
+		#search {
+			display: none;
+		}
+
+		.seperate_line {
+			width: 80%;
+			border-color: #0BD2F1;
+			border-width: thick;
+			border-style: dotted;
+		}
+
+		#content {
+			width: 80%;
+			margin: auto;
+		}
+
+		#float {
+			display: none;
+			position: absolute;
+			border-radius: 5px;
+			background-color: #F1F1F1;
+		}
+
+		.col-sm-12 {
+            font-size: 16px;
+            padding-left: 20px;
+            line-height: 15px;
+        }
+	</style>
+
+	<script type="text/javascript">
+		$(window).load(function () {
+			var $win = $(window),
+				$ad = $('#float').css('opacity', 80).show(),
+				_width = $ad.width(),
+				_height = $ad.height(),
+				_diffY = 20, _diffX = 20,
+				_moveSpeed = 800;
+
+			$ad.css({
+				top: $(document).height(),
+				left: $win.width() - _width - _diffX,
+				opacity: 1
+			});
+
+			$win.bind('scroll resize', function () {
+				var $this = $(this);
+
+				$ad.stop().animate({
+					top: $this.scrollTop() + $this.height() - _height - _diffY,
+					left: $this.scrollLeft() + $this.width() - _width - _diffX
+				}, _moveSpeed);
+			}).scroll();
+
+			$('#float .close').click(function () {
+				$ad.hide();
+			});
+		});
+
+		function getPage1() {
+            var url = "http://140.119.162.188:2017/today/json/category1.json";
+            openSearch();
+            loadJson(url);
+        }
+
+        function getPage2() {
+            var url = "http://140.119.162.188:2017/today/json/category2.json";
+            openSearch();
+            loadJson(url);
+        }
+
+        function getPage3() {
+            var url = "http://140.119.162.188:2017/today/json/category3.json";
+            openSearch();
+            loadJson(url);
+        }
+
+        function getPage4() {
+            var url = "http://140.119.162.188:2017/today/json/category4.json";
+            openSearch();
+            loadJson(url);
+        }
+
+        function getPage5() {
+            var url = "http://140.119.162.188:2017/today/json/category5.json";
+            openSearch();
+            loadJson(url);
+        }
+
+        function getPage6() {
+            var url = "http://140.119.162.188:2017/today/json/category6.json";
+            openSearch();
+            loadJson(url);
+        }
+
+        function getPage7() {
+            var url = "http://140.119.162.188:2017/today/json/category7.json";
+            openSearch();
+            loadJson(url);
+        }
+
+        function getPage8() {
+            var url = "http://140.119.162.188:2017/today/json/category8.json";
+            openSearch();
+            loadJson(url);
+        }
+
+        function getPage11() {
+            var url = "http://140.119.162.188:2017/today/json/category11.json";
+            openSearch();
+            loadJson(url);
+        }
+
+        function getPage13() {
+            var url = "http://140.119.162.188:2017/today/json/category13.json";
+            openSearch();
+            loadJson(url);
+        }
+
+        function getPage14() {
+            var url = "http://140.119.162.188:2017/today/json/category14.json";
+            openSearch();
+            loadJson(url);
+        }
+
+		function getPage15() {
+            var url = "http://140.119.162.188:2017/today/json/category15.json";
+            openSearch();
+            loadJson(url);
+        }
+
+        function getPage17() {
+            var url = "http://140.119.162.188:2017/today/json/category17.json";
+            openSearch();
+            loadJson(url);
+        }
+
+        function getPage19() {
+            var url = "http://140.119.162.188:2017/today/json/category19.json";
+            openSearch();
+            loadJson(url);
+        }
+
+		function openSearch() {
+            document.getElementById("search").style.display = "block"; 
+        }
+
+        function loadJson(url) {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    constructTable(this.responseText);
+                }
+            };
+            xhttp.open("GET", url, true);
+            xhttp.send();
+        }
+
+        function constructTable(jsonStr) {
+            var i;
+            var json = JSON.parse(jsonStr);
+            var txt = "";
+            txt += "<table>"
+            for (x in json) {
+
+                txt += "<div class='row wrap' data-index='" + json[x].title + json[x].showUnit + json[x].discountInfo + json[x].masterUnit + json[x].sourceWebName + json[x].startDate + json[x].endDate + "'></br><div class='title'>" + json[x].title + "</div></br></div>";
+                txt += "<div class='row wrap' data-index='" + json[x].title + json[x].showUnit + json[x].discountInfo + json[x].masterUnit + json[x].sourceWebName + json[x].startDate + json[x].endDate + "'><div class='col-sm-12'></br><span><strong>．演出單位：</strong></span> " + json[x].showUnit + "</div></br></div>";
+                txt += "<div class='row wrap' data-index='" + json[x].title + json[x].showUnit + json[x].discountInfo + json[x].masterUnit + json[x].sourceWebName + json[x].startDate + json[x].endDate + "'><div class='col-sm-12'></br><span><strong>．折扣資訊：</strong></span> " + json[x].discountInfo + "</div></br></div>";
+                txt += "<div class='row wrap' data-index='" + json[x].title + json[x].showUnit + json[x].discountInfo + json[x].masterUnit + json[x].sourceWebName + json[x].startDate + json[x].endDate + "'><div class='col-sm-12'></br><span><strong>．簡介說明：</strong></span> " + json[x].descriptionFilterHtml + "</div></br></div>";
+                txt += "<div class='row wrap' data-index='" + json[x].title + json[x].showUnit + json[x].discountInfo + json[x].masterUnit + json[x].sourceWebName + json[x].startDate + json[x].endDate + "'><div class='col-sm-12'></br><span><strong>．主辦單位：</strong></span> " + json[x].masterUnit + "</div></br></div>";
+				txt += "<div class='row wrap' data-index='" + json[x].title + json[x].showUnit + json[x].discountInfo + json[x].masterUnit + json[x].sourceWebName + json[x].startDate + json[x].endDate + "'><div class='col-sm-12'></br><span><strong>．協辦單位：</strong></span> " + json[x].subUnit + "</div></br></div>";
+				txt += "<div class='row wrap' data-index='" + json[x].title + json[x].showUnit + json[x].discountInfo + json[x].masterUnit + json[x].sourceWebName + json[x].startDate + json[x].endDate + "'><div class='col-sm-12'></br><span><strong>．贊助單位：</strong></span> " + json[x].supportUnit + "</div></br></div>";
+				txt += "<div class='row wrap' data-index='" + json[x].title + json[x].showUnit + json[x].discountInfo + json[x].masterUnit + json[x].sourceWebName + json[x].startDate + json[x].endDate + "'><div class='col-sm-12'></br><span><strong>．其他單位：</strong></span> " + json[x].otherUnit + "</div></br></div>";
+				txt += "<div class='row wrap' data-index='" + json[x].title + json[x].showUnit + json[x].discountInfo + json[x].masterUnit + json[x].sourceWebName + json[x].startDate + json[x].endDate + "'><div class='col-sm-12'></br><span><strong>．售票網址：</strong></span><a href='" + json[x].webSales + "'>請點擊</a></div></br></div>";
+				txt += "<div class='row wrap' data-index='" + json[x].title + json[x].showUnit + json[x].discountInfo + json[x].masterUnit + json[x].sourceWebName + json[x].startDate + json[x].endDate + "'><div class='col-sm-12'></br><span><strong>．來源網站名稱：</strong></span> " + json[x].sourceWebName + "</div></br></div>";
+                txt += "<div class='row wrap' data-index='" + json[x].title + json[x].showUnit + json[x].discountInfo + json[x].masterUnit + json[x].sourceWebName + json[x].startDate + json[x].endDate + "'><div class='col-sm-12'></br><span><strong>．活動起始日期：</strong></span> " + json[x].startDate + "</div></br></div>";
+                txt += "<div class='row wrap' data-index='" + json[x].title + json[x].showUnit + json[x].discountInfo + json[x].masterUnit + json[x].sourceWebName + json[x].startDate + json[x].endDate + "'><div class='col-sm-12'></br><span><strong>．活動結束日期：</strong></span> " + json[x].endDate + "</div></br></div>";
+
+            }
+            txt += "</table>"
+            document.getElementById("content").innerHTML = txt;
+        }
+	</script>
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-lg fixed-top navbar-light" style="background: #F1F1F1">
+		<a class="navbar-brand" href="#" style="color: gray; font-weight: bold;">
+			<i class="fab fa-fort-awesome"></i> 文化部 開放資料服務網</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+		 aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						藝文活動類別
+					</a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="background: #F1F1F1">
+						<a class="dropdown-item" onclick="getPage1()" style="color: gray">音樂</a>
+                        <a class="dropdown-item" onclick="getPage2()" style="color: gray">戲劇</a>
+                        <a class="dropdown-item" onclick="getPage3()" style="color: gray">舞蹈</a>
+                        <a class="dropdown-item" onclick="getPage4()" style="color: gray">親子</a>
+                        <a class="dropdown-item" onclick="getPage5()" style="color: gray">獨立音樂</a>
+                        <a class="dropdown-item" onclick="getPage6()" style="color: gray">展覽</a>
+                        <a class="dropdown-item" onclick="getPage7()" style="color: gray">講座</a>
+                        <a class="dropdown-item" onclick="getPage8()" style="color: gray">電影</a>
+                        <a class="dropdown-item" onclick="getPage11()" style="color: gray">綜藝</a>
+                        <a class="dropdown-item" onclick="getPage13()" style="color: gray">競賽</a>
+						<a class="dropdown-item" onclick="getPage14()" style="color: gray">徵選</a>
+						<a class="dropdown-item" onclick="getPage15()" style="color: gray">其他</a>
+                        <a class="dropdown-item" onclick="getPage17()" style="color: gray">演唱會</a>
+                        <a class="dropdown-item" onclick="getPage19()" style="color: gray">研習課程</a>
+					</div>
+				</li>
+			</ul>
+			<form class="form-inline my-2 my-lg-0" id="search">
+				<input class="form-control mr-sm-2" id="search-input" type="text" placeholder="輸入關鍵字" aria-label="Search">
+				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜尋</button>
+				<style id="m-search"></style>
+			</form>
+			
+		</div>
+	</nav>
+
+	<div id="header">
+		<img id="header_image" src="https://mir-s3-cdn-cf.behance.net/project_modules/max_3840/8ca7b066749151.5b20de7636728.jpg">
+		<div id="header_name">
+			<h4><strong>文化部</strong></h4>
+			<h4><strong>開放資料服務網</strong></h4>
+			<h6>OPEN DATA SERVICES OF MOC</h6>
+		</div>
+	</div>
+
+	<div id="sub_title">藝文活動</div>
+	<hr class="seperate_line">
+	
+	<div id="content">
+		<div id="hint">
+			<i class="far fa-eye"></i> 點擊「藝文活動類別」後顯示
+		</div>
+	</div>
+
+	<div id="float">
+		<button class="btn btn-outline-success" type="button" onclick="location.href='https://opendata.culture.tw/'">﹝官網﹞文化資料開放服務網</button>
+	</div>
+
+	<script>
+		var that = $(this);
+        var mSearch = $("#m-search");
+        $("#search-input").bind("change paste keyup", function() {
+            var value = $(this).val();
+            if (!value) {
+                mSearch.html("");
+                return;
+            };
+            mSearch.html('.wrap:not([data-index*="' + value.toLowerCase() + '"]) {display: none;}');
+        });
+	</script>
+</body>
+
+</html>
